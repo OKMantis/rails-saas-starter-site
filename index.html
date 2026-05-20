@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rails SaaS Starter — Ship your Rails SaaS in a weekend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0e;
+    --bg2: #161616;
+    --bg3: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede8;
+    --muted: #888580;
+    --accent: #d4f57a;
+    --accent2: #b8e05a;
+    --red: #ff6b6b;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(14,14,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-buy {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--accent);
+    color: #0e0e0e;
+    padding: 7px 18px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .nav-buy:hover { background: var(--accent2); color: #0e0e0e; }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 7rem 2rem 5rem;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    border: 0.5px solid rgba(212,245,122,0.3);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-badge span {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #0e0e0e;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 6px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); color: #0e0e0e; }
+
+  .price-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .code-preview {
+    max-width: 680px;
+    margin: 4rem auto 0;
+    background: var(--bg2);
+    border: 0.5px solid var(--border2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--bg3);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28c840; }
+
+  .code-file {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+
+  .code-body {
+    padding: 1.5rem;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-x: auto;
+    text-align: left;
+  }
+
+  .c-green { color: #7ec87e; }
+  .c-blue { color: #79b8ff; }
+  .c-yellow { color: #e3c46a; }
+  .c-pink { color: #f0a0c0; }
+  .c-muted { color: #555; }
+  .c-accent { color: var(--accent); }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .section-intro {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .feature {
+    background: var(--bg);
+    padding: 1.75rem;
+  }
+
+  .feature-icon { font-size: 20px; margin-bottom: 0.75rem; }
+
+  .feature-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .feature-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 0.5px solid var(--border2);
+    color: var(--muted);
+    background: var(--bg2);
+  }
+
+  .tag.highlight {
+    border-color: rgba(212,245,122,0.3);
+    color: var(--accent);
+    background: rgba(212,245,122,0.06);
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pain-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .pain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .pain-item .x {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    background: rgba(255,107,107,0.1);
+    border: 0.5px solid rgba(255,107,107,0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pain-item .check {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(212,245,122,0.1);
+    border: 0.5px solid rgba(212,245,122,0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .maker-card {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: var(--bg2);
+    border: 0.5px solid var(--border2);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .maker-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 0.5px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .maker-name {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .maker-handle {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .maker-bio {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .pricing-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border2);
+    border-radius: 12px;
+    padding: 3rem;
+    max-width: 460px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .price-amount {
+    font-family: var(--serif);
+    font-size: 4rem;
+    color: var(--text);
+    line-height: 1;
+    margin: 1rem 0 0.25rem;
+  }
+
+  .price-period {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .price-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-features li {
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .btn-buy {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: #0e0e0e;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+    transition: background 0.15s, transform 0.1s;
+    margin-bottom: 1rem;
+  }
+  .btn-buy:hover { background: var(--accent2); transform: translateY(-1px); color: #0e0e0e; }
+
+  .buy-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 0.5px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .maker-card { flex-direction: column; gap: 1rem; }
+    .pricing-card { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">rails-saas-starter</div>
+  <a href="YOUR_GUMROAD_URL" class="nav-buy">Buy — €149</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <span></span>
+    Rails 8.1 · Production ready
+  </div>
+  <h1>Ship your Rails SaaS<br>in a <em>weekend,</em> not a month</h1>
+  <p class="hero-sub">
+    Auth, billing, AI integration, multi-tenancy, admin panel, and Kamal deployment — all wired up and working. Skip the boilerplate. Build your product.
+  </p>
+  <div class="hero-cta">
+    <a href="YOUR_GUMROAD_URL" class="btn-primary">
+      Get the boilerplate →
+    </a>
+    <span class="price-note">€149 one-time · lifetime updates · single dev license</span>
+  </div>
+
+  <div class="code-preview">
+    <div class="code-header">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span class="code-file">app/services/anthropic_service.rb</span>
+    </div>
+    <div class="code-body">
+      <span class="c-muted"># Already wired up. Just call it.</span><br>
+      service = <span class="c-blue">AnthropicService</span>.new(<br>
+      &nbsp;&nbsp;account: current_account,<br>
+      &nbsp;&nbsp;user: current_user<br>
+      )<br><br>
+      result = service.<span class="c-pink">chat</span>(<br>
+      &nbsp;&nbsp;prompt: params[<span class="c-yellow">:message</span>],<br>
+      &nbsp;&nbsp;system: <span class="c-yellow">"You are a helpful assistant."</span><br>
+      )<br><br>
+      <span class="c-muted"># Rate limiting, usage tracking, cost calculation</span><br>
+      <span class="c-muted"># — all handled automatically. Per plan.</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section>
+  <div class="section-label">The problem</div>
+  <h2>Every Rails SaaS starts<br>the same way</h2>
+  <p class="section-intro">Two weeks of setup before you write a single line of real product code.</p>
+
+  <ul class="pain-list">
+    <li class="pain-item"><span class="x">skip</span> Devise setup, confirmable, OAuth callbacks, magic links</li>
+    <li class="pain-item"><span class="x">skip</span> Stripe webhooks, Pay gem config, plan syncing</li>
+    <li class="pain-item"><span class="x">skip</span> Multi-tenant scoping, account switching, membership roles</li>
+    <li class="pain-item"><span class="x">skip</span> Anthropic SDK wrapper, token tracking, rate limiting</li>
+    <li class="pain-item"><span class="x">skip</span> Admin panel, Kamal config, Dockerfile, seed data</li>
+  </ul>
+
+  <ul class="pain-list">
+    <li class="pain-item"><span class="check">done</span> All of the above, already built, tested, and committed</li>
+    <li class="pain-item"><span class="check">done</span> 17 RSpec examples + 15 Playwright e2e tests passing</li>
+    <li class="pain-item"><span class="check">done</span> Rubocop clean, Brakeman zero warnings</li>
+    <li class="pain-item"><span class="check">done</span> CLAUDE.md + 4 Claude Code slash commands</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="section-label">What's included</div>
+  <h2>Everything. Nothing missing.</h2>
+  <p class="section-intro">Six layers of production-ready code, wired together the Rails way.</p>
+
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Authentication</div>
+      <div class="feature-desc">Email/password, magic links, Google OAuth, GitHub OAuth. Confirmable. All on one User model.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">💳</div>
+      <div class="feature-title">Billing</div>
+      <div class="feature-desc">Stripe Checkout + Customer Portal via Pay gem. Plan feature gating with a jsonb features column.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🏢</div>
+      <div class="feature-title">Multi-tenancy</div>
+      <div class="feature-desc">Session-based accounts. Users belong to multiple accounts. All queries scoped to current_account.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI integration</div>
+      <div class="feature-desc">AnthropicService with rate limiting, token tracking, and cost calculation in cents. Per-plan daily limits.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚙️</div>
+      <div class="feature-title">Admin panel</div>
+      <div class="feature-desc">Custom /admin namespace. Users, accounts, AI usage, dashboard KPIs. No gems, pure Rails + Tailwind.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🚀</div>
+      <div class="feature-title">Deployment</div>
+      <div class="feature-desc">Kamal 2 config, Dockerfile, Solid Queue + Solid Cache. No Redis. Deploy to any VPS in one command.</div>
+    </div>
+  </div>
+
+  <div class="stack-row">
+    <span class="tag highlight">Rails 8.1</span>
+    <span class="tag highlight">Hotwire</span>
+    <span class="tag highlight">Tailwind 4</span>
+    <span class="tag highlight">Claude Code ready</span>
+    <span class="tag">Devise</span>
+    <span class="tag">Pay gem</span>
+    <span class="tag">Stripe</span>
+    <span class="tag">Anthropic SDK</span>
+    <span class="tag">RSpec</span>
+    <span class="tag">Playwright</span>
+    <span class="tag">Kamal 2</span>
+    <span class="tag">PostgreSQL</span>
+    <span class="tag">Propshaft</span>
+    <span class="tag">DaisyUI</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="section-label">The maker</div>
+  <h2>Built by a Rails dev,<br>for Rails devs</h2>
+  <br>
+  <div class="maker-card">
+    <div class="maker-avatar">OM</div>
+    <div>
+      <div class="maker-name">Owen Moss</div>
+      <div class="maker-handle">@OKMantis · Ibiza, Spain</div>
+      <p class="maker-bio">
+        7 years building Rails apps. I got tired of spending the first two weeks of every project wiring up the same auth, billing, and admin setup. So I built this once, properly, with tests — and now you don't have to.<br><br>
+        Questions? Reply to the Gumroad receipt email. I actually respond.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="section-label">Pricing</div>
+  <h2>One price. No subscription.</h2>
+
+  <div class="pricing-card">
+    <div class="section-label">Single developer license</div>
+    <div class="price-amount">€149</div>
+    <div class="price-period">ONE-TIME · LIFETIME UPDATES</div>
+
+    <ul class="price-features">
+      <li>Full source code, private GitHub repo access</li>
+      <li>All 6 layers: auth, billing, AI, admin, tenancy, deploy</li>
+      <li>17 RSpec + 15 Playwright tests included</li>
+      <li>CLAUDE.md + 4 Claude Code slash commands</li>
+      <li>Lifetime updates as Rails evolves</li>
+      <li>Email support from the maker</li>
+    </ul>
+
+    <a href="YOUR_GUMROAD_URL" class="btn-buy">Buy now →</a>
+    <p class="buy-note">
+      After purchase, email your GitHub username to get repo access.<br>
+      Single project license — no redistribution.
+    </p>
+  </div>
+</section>
+
+<footer>
+  Built by <a href="https://github.com/OKMantis" style="color: var(--accent)">@OKMantis</a> · rails-saas-starter · 2026
+</footer>
+
+</body>
+</html>
