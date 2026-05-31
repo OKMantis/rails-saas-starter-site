@@ -460,9 +460,82 @@
     color: var(--muted);
   }
 
+  .agents-block {
+    margin-top: 2.5rem;
+    background: var(--bg2);
+    border: 0.5px solid var(--border2);
+    border-radius: 10px;
+    padding: 1.75rem;
+  }
+
+  .agents-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .agents-label-inline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .agents-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .agents-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .agent-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    border: 0.5px solid var(--border2);
+    color: var(--text);
+    background: var(--bg3);
+  }
+
+  .finalize-cmd {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(212,245,122,0.04);
+    border: 0.5px solid rgba(212,245,122,0.15);
+    border-radius: 6px;
+  }
+
+  .finalize-slash {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .finalize-desc {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
   @media (max-width: 600px) {
     .maker-card { flex-direction: column; gap: 1rem; }
     .pricing-card { padding: 2rem 1.5rem; }
+    .finalize-cmd { flex-direction: column; gap: 6px; }
   }
 </style>
 </head>
@@ -531,7 +604,7 @@
     <li class="pain-item"><span class="check">done</span> All of the above, already built, tested, and committed</li>
     <li class="pain-item"><span class="check">done</span> 17 RSpec examples + 15 Playwright e2e tests passing</li>
     <li class="pain-item"><span class="check">done</span> Rubocop clean, Brakeman zero warnings</li>
-    <li class="pain-item"><span class="check">done</span> CLAUDE.md + 4 Claude Code slash commands</li>
+    <li class="pain-item"><span class="check">done</span> CLAUDE.md + 9 Claude Code agents + /finalize command</li>
   </ul>
 </section>
 
@@ -591,6 +664,28 @@
     <span class="tag">Propshaft</span>
     <span class="tag">DaisyUI</span>
   </div>
+
+  <div class="agents-block">
+    <div class="agents-header">
+      <span class="agents-label-inline">Claude Code agents</span>
+      <span class="agents-count">9 specialized agents · pre-wired to your codebase</span>
+    </div>
+    <div class="agents-grid">
+      <span class="agent-tag">architect</span>
+      <span class="agent-tag">coder</span>
+      <span class="agent-tag">cybersecurity</span>
+      <span class="agent-tag">debugger</span>
+      <span class="agent-tag">documenter</span>
+      <span class="agent-tag">migrator</span>
+      <span class="agent-tag">reviewer</span>
+      <span class="agent-tag">SEO</span>
+      <span class="agent-tag">tester</span>
+    </div>
+    <div class="finalize-cmd">
+      <span class="finalize-slash">/finalize</span>
+      <span class="finalize-desc">runs a full quality pass before every merge — linting, tests, security scan, coverage check</span>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -627,7 +722,7 @@
       <li>Full source code, private GitHub repo access</li>
       <li>All 6 layers: auth, billing, AI, admin, tenancy, deploy</li>
       <li>17 RSpec + 15 Playwright tests included</li>
-      <li>CLAUDE.md + 4 Claude Code slash commands</li>
+      <li>CLAUDE.md + 9 Claude Code agents + /finalize command</li>
       <li>Lifetime updates as Rails evolves</li>
       <li>Email support from the maker</li>
     </ul>
