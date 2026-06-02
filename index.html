@@ -656,11 +656,11 @@
       <div class="dot dot-r"></div>
       <div class="dot dot-y"></div>
       <div class="dot dot-g"></div>
-      <span class="code-file">app/services/anthropic_service.rb</span>
+      <span class="code-file">app/services/llm_service.rb</span>
     </div>
     <div class="code-body">
       <span class="c-muted"># Already wired up. Just call it.</span><br>
-      service = <span class="c-blue">AnthropicService</span>.new(<br>
+      service = <span class="c-blue">LlmService</span>.new(<br>
       &nbsp;&nbsp;account: current_account,<br>
       &nbsp;&nbsp;user: current_user<br>
       )<br><br>
@@ -685,7 +685,7 @@
     <li class="pain-item"><span class="x">skip</span> Devise setup, confirmable, OAuth callbacks, magic links</li>
     <li class="pain-item"><span class="x">skip</span> Stripe webhooks, Pay gem config, plan syncing</li>
     <li class="pain-item"><span class="x">skip</span> Multi-tenant scoping, account switching, membership roles</li>
-    <li class="pain-item"><span class="x">skip</span> Anthropic SDK wrapper, token tracking, rate limiting</li>
+    <li class="pain-item"><span class="x">skip</span> RubyLLM wrapper, token tracking, rate limiting</li>
     <li class="pain-item"><span class="x">skip</span> Admin panel, Kamal config, Dockerfile, seed data</li>
   </ul>
 
@@ -753,7 +753,7 @@
     <div class="feature">
       <div class="feature-icon">🤖</div>
       <div class="feature-title">AI integration</div>
-      <div class="feature-desc">AnthropicService with rate limiting, token tracking, and cost calculation in cents. Per-plan daily limits.</div>
+      <div class="feature-desc">LlmService with rate limiting, token tracking, and cost calculation in cents. Per-plan daily limits.</div>
     </div>
     <div class="feature">
       <div class="feature-icon">⚙️</div>
@@ -775,7 +775,7 @@
     <span class="tag">Devise</span>
     <span class="tag">Pay gem</span>
     <span class="tag">Stripe</span>
-    <span class="tag">Anthropic SDK</span>
+    <span class="tag">RubyLLM</span>
     <span class="tag">RSpec</span>
     <span class="tag">Playwright</span>
     <span class="tag">Kamal 2</span>
