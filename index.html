@@ -564,10 +564,67 @@
     line-height: 1.6;
   }
 
+  .time-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    border: 0.5px solid var(--border2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .time-table th {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    background: var(--bg3);
+    border-bottom: 0.5px solid var(--border2);
+  }
+
+  .time-table td {
+    padding: 0.9rem 1.25rem;
+    font-size: 14px;
+    color: var(--muted);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .time-table td:last-child {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .time-table tr:last-child td {
+    border-bottom: none;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    background: rgba(212,245,122,0.04);
+  }
+
+  .value-line {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .value-accent {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 500;
+  }
+
   @media (max-width: 600px) {
     .maker-card { flex-direction: column; gap: 1rem; }
     .pricing-card { padding: 2rem 1.5rem; }
     .finalize-cmd { flex-direction: column; gap: 6px; }
+    .time-table td { padding: 0.75rem 1rem; }
   }
 </style>
 </head>
@@ -585,7 +642,7 @@
   </div>
   <h1>Ship your Rails SaaS<br>in a <em>weekend,</em> not a month</h1>
   <p class="hero-sub">
-    Auth, billing, AI integration, multi-tenancy, admin panel, and Kamal deployment — all wired up and working. Skip the boilerplate. Build your product.
+    Skip 41 hours of setup. Auth, billing, AI integration, multi-tenancy, admin panel, and Kamal deployment — all wired up and tested. Start building your product on day one.
   </p>
   <div class="hero-cta">
     <a href="https://6742626972499.gumroad.com/l/njgyuu?wanted=true" class="btn-primary">
@@ -638,6 +695,36 @@
     <li class="pain-item"><span class="check">done</span> Rubocop clean, Brakeman zero warnings</li>
     <li class="pain-item"><span class="check">done</span> CLAUDE.md + 9 Claude Code agents + /finalize command</li>
   </ul>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="section-label">Time saved</div>
+  <h2>41 hours of setup. Done.</h2>
+
+  <table class="time-table">
+    <thead>
+      <tr>
+        <th>What</th>
+        <th style="text-align:right">Hours saved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Auth (Devise, magic links, OAuth)</td><td>8 hrs</td></tr>
+      <tr><td>Stripe billing + webhooks</td><td>6 hrs</td></tr>
+      <tr><td>Multi-tenancy</td><td>4 hrs</td></tr>
+      <tr><td>AI integration + rate limiting</td><td>4 hrs</td></tr>
+      <tr><td>Admin panel</td><td>6 hrs</td></tr>
+      <tr><td>Kamal + Dockerfile + Solid Queue</td><td>4 hrs</td></tr>
+      <tr><td>RSpec + FactoryBot + test helpers</td><td>3 hrs</td></tr>
+      <tr><td>Playwright e2e test suite</td><td>4 hrs</td></tr>
+      <tr><td>Claude Code agents + CLAUDE.md</td><td>2 hrs</td></tr>
+      <tr><td>Total</td><td>41 hrs</td></tr>
+    </tbody>
+  </table>
+
+  <p class="value-line">At €75/hr freelance rate, that's <span class="value-accent">€3,075</span> worth of setup work for €149.</p>
 </section>
 
 <hr class="divider">
