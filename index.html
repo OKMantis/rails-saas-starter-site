@@ -845,6 +845,14 @@
       <div class="faq-q">Can't I just generate this with AI?</div>
       <div class="faq-a">You can generate the pieces. This is the pieces already integrated, tested, and proven to work together. That's the part that takes a weekend.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q">Does it work with OpenAI or just Anthropic?</div>
+      <div class="faq-a">It uses RubyLLM which supports Anthropic, OpenAI, and Google out of the box. Switch providers by changing one line.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I don't need multi-tenancy?</div>
+      <div class="faq-a">The current_account pattern is straightforward to remove — it's one before_action and scoped queries. The README documents exactly what to delete.</div>
+    </div>
   </div>
 </section>
 
